@@ -1,0 +1,24 @@
+# Build artefakty
+bin/
+obj/
+
+# Visual Studio nastavenia
+.vs/
+
+# Užívateľské nastavenia
+*.user
+*.suo
+
+# Logy
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# NuGet balíčky
+*.nupkg
+packages/
+
+# Publish output
+publish/

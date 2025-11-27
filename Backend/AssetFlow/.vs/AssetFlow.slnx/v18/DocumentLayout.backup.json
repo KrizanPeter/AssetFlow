@@ -1,0 +1,126 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{43B3D3AF-0705-4589-81EF-ADEC12179F19}|AssetFlow\\AssetFlow.API.csproj|c:\\users\\kriza\\source\\repos\\assetflow\\backend\\assetflow\\assetflow\\assetflow.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{43B3D3AF-0705-4589-81EF-ADEC12179F19}|AssetFlow\\AssetFlow.API.csproj|solutionrelative:assetflow\\assetflow.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EACA0617-B5A9-4563-93EC-15433DBCAECA}|AssetFlow.Persistence\\AssetFlow.Persistence.csproj|c:\\users\\kriza\\source\\repos\\assetflow\\backend\\assetflow\\assetflow.persistence\\assetflow.persistence.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{EACA0617-B5A9-4563-93EC-15433DBCAECA}|AssetFlow.Persistence\\AssetFlow.Persistence.csproj|solutionrelative:assetflow.persistence\\assetflow.persistence.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EE5F41C-9010-46D3-A6CB-AB1453C3E3DE}|AssetFlow.AppServices\\AssetFlow.AppServices.csproj|c:\\users\\kriza\\source\\repos\\assetflow\\backend\\assetflow\\assetflow.appservices\\assetflow.appservices.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{3EE5F41C-9010-46D3-A6CB-AB1453C3E3DE}|AssetFlow.AppServices\\AssetFlow.AppServices.csproj|solutionrelative:assetflow.appservices\\assetflow.appservices.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EACA0617-B5A9-4563-93EC-15433DBCAECA}|AssetFlow.Persistence\\AssetFlow.Persistence.csproj|c:\\users\\kriza\\source\\repos\\assetflow\\backend\\assetflow\\assetflow.persistence\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EACA0617-B5A9-4563-93EC-15433DBCAECA}|AssetFlow.Persistence\\AssetFlow.Persistence.csproj|solutionrelative:assetflow.persistence\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A79D9F73-E524-4E36-8A97-AD9F1DC5BD01}|AssetFlow.Domain\\AssetFlow.Domain.csproj|c:\\users\\kriza\\source\\repos\\assetflow\\backend\\assetflow\\assetflow.domain\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A79D9F73-E524-4E36-8A97-AD9F1DC5BD01}|AssetFlow.Domain\\AssetFlow.Domain.csproj|solutionrelative:assetflow.domain\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EE5F41C-9010-46D3-A6CB-AB1453C3E3DE}|AssetFlow.AppServices\\AssetFlow.AppServices.csproj|c:\\users\\kriza\\source\\repos\\assetflow\\backend\\assetflow\\assetflow.appservices\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EE5F41C-9010-46D3-A6CB-AB1453C3E3DE}|AssetFlow.AppServices\\AssetFlow.AppServices.csproj|solutionrelative:assetflow.appservices\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AssetFlow.API",
+              "DocumentMoniker": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow\\AssetFlow.API.csproj",
+              "RelativeDocumentMoniker": "AssetFlow\\AssetFlow.API.csproj",
+              "ToolTip": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow\\AssetFlow.API.csproj",
+              "RelativeToolTip": "AssetFlow\\AssetFlow.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-27T21:34:56.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AssetFlow.Persistence",
+              "DocumentMoniker": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow.Persistence\\AssetFlow.Persistence.csproj",
+              "RelativeDocumentMoniker": "AssetFlow.Persistence\\AssetFlow.Persistence.csproj",
+              "ToolTip": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow.Persistence\\AssetFlow.Persistence.csproj",
+              "RelativeToolTip": "AssetFlow.Persistence\\AssetFlow.Persistence.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-27T21:34:47.526Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AssetFlow.AppServices",
+              "DocumentMoniker": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow.AppServices\\AssetFlow.AppServices.csproj",
+              "RelativeDocumentMoniker": "AssetFlow.AppServices\\AssetFlow.AppServices.csproj",
+              "ToolTip": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow.AppServices\\AssetFlow.AppServices.csproj",
+              "RelativeToolTip": "AssetFlow.AppServices\\AssetFlow.AppServices.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-27T21:34:30.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow.Persistence\\Class1.cs",
+              "RelativeDocumentMoniker": "AssetFlow.Persistence\\Class1.cs",
+              "ToolTip": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow.Persistence\\Class1.cs",
+              "RelativeToolTip": "AssetFlow.Persistence\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T21:34:11.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow.Domain\\Class1.cs",
+              "RelativeDocumentMoniker": "AssetFlow.Domain\\Class1.cs",
+              "ToolTip": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow.Domain\\Class1.cs",
+              "RelativeToolTip": "AssetFlow.Domain\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T21:33:50.73Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow.AppServices\\Class1.cs",
+              "RelativeDocumentMoniker": "AssetFlow.AppServices\\Class1.cs",
+              "ToolTip": "C:\\Users\\kriza\\source\\repos\\AssetFlow\\Backend\\AssetFlow\\AssetFlow.AppServices\\Class1.cs",
+              "RelativeToolTip": "AssetFlow.AppServices\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T21:33:29.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
