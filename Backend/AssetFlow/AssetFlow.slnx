@@ -1,6 +1,0 @@
-<Solution>
-  <Project Path="AssetFlow.AppServices/AssetFlow.AppServices.csproj" />
-  <Project Path="AssetFlow.Domain/AssetFlow.Domain.csproj" />
-  <Project Path="AssetFlow.Persistence/AssetFlow.Persistence.csproj" />
-  <Project Path="AssetFlow/AssetFlow.API.csproj" />
-</Solution>
