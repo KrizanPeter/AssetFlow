@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: AssetFlow.API/Dockerfile
+    container_name: assetflow-api
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - postgres
+    environment:
+      # Connection string pre PostgreSQL
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=assetflowdb;Username=postgres;Password=postgres"
+
+  postgres:
+    image: postgres:16
+    container_name: assetflow-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: assetflowdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

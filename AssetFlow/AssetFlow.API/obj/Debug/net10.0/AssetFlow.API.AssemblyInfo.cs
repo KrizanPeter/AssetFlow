@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AssetFlow.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e3608e16bc2eaaa029c0dd8e9c12ca1135bcd78")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f231cd6af10636c169aae41e08941c314c33f624")]
 [assembly: System.Reflection.AssemblyProductAttribute("AssetFlow.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AssetFlow.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
