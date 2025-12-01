@@ -9,9 +9,8 @@ bin/
 .bin/
 obj/
 .obj/
-**/obj/
 **/bin/
-
+**/obj/
 
 # User-specific settings
 *.user
