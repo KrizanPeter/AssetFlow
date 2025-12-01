@@ -1,5 +1,6 @@
 using AssetFlow.API.Endpoints;
 using AssetFlow.API.Extensions;
+using AssetFlow.API.ExtensionsDI;
 using AssetFlow.Application.MediatR.Commands;
 using Mapster;
 using MapsterMapper;
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 IdentityExtensionDI.AddIdentityServices(builder.Services, builder.Configuration);
 MapsterExtensionDI.AddMapsterServices(builder.Services);
+ApplicationDependenciesDI.AddAppDependencies(builder.Services, builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

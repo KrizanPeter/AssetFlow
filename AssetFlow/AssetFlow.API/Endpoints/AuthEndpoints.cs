@@ -1,5 +1,7 @@
-﻿using AssetFlow.Application.Dtos;
+﻿using AssetFlow.API.ExtensionsDI;
+using AssetFlow.Application.Dtos;
 using AssetFlow.Application.MediatR.Commands;
+using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +28,10 @@ namespace AssetFlow.API.Endpoints
             {
                 var user = await mediator.Send(CreateUserCommand.Of(registerDto), ct);
 
-                return Results.Created($"/users/{user.Id}", user);
+                if (user.IsSuccess)
+                    return Results.Created($"/users/{user.Value.Id}", user.Value.Id);
+
+                return user.ToApiResult();
             }
             catch (Exception ex)
             {

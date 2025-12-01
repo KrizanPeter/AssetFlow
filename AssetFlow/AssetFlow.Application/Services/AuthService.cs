@@ -22,24 +22,23 @@ namespace AssetFlow.Application.Services
         private readonly SignInManager<AppUser> _signInManager;
         //private readonly IAccountService _accountService;
         public AuthService(ILogger<AuthService> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            IUserRepository userRepository, ITokenService tokenService, /*IAccountService accountService*/, IMapper mapper)
+            ITokenService tokenService, /*IAccountService accountService*/ IMapper mapper)
         {
             //_accountService = accountService;
             _logger = logger;
             _tokenService = tokenService;
-            _userRepository = userRepository;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
-        public async Task<Result<UserDto>> RegisterNewUserAsync(CreateUserDto registerDto)
+        public async Task<Result<UserDto>> RegisterNewUserAsync(AppUser user, string password)
         {
-            var userEntity = _mapper.Map<AppUser>(registerDto);
-            userEntity.DateOfCreation = DateTime.Now;
-            userEntity.DateOfLastModification = DateTime.Now;
 
-            var result = await _userManager.CreateAsync(userEntity, registerDto.Password);
+            user.DateOfCreation = DateTime.Now;
+            user.DateOfLastModification = DateTime.Now;
+
+            var result = await _userManager.CreateAsync(user, password);
 
             if (!result.Succeeded)
             {

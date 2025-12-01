@@ -18,6 +18,8 @@ namespace AssetFlow.Application.MapsterConfig
             config.NewConfig<LoginUserDto, AppUser>();
 
             config.NewConfig<CreateUserCommand, AppUser>();
+    
+
         }
     }
 }
