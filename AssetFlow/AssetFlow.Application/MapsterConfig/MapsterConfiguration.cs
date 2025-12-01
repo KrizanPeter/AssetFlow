@@ -1,4 +1,5 @@
 ﻿using AssetFlow.Application.Dtos;
+using AssetFlow.Application.MediatR.Commands;
 using AssetFlow.Domain.Entities.Auth;
 using Mapster;
 
@@ -15,6 +16,8 @@ namespace AssetFlow.Application.MapsterConfig
             config.NewConfig<UserDto, AppUser>();
             config.NewConfig<CreateUserDto, AppUser>();
             config.NewConfig<LoginUserDto, AppUser>();
+
+            config.NewConfig<CreateUserCommand, AppUser>();
         }
     }
 }

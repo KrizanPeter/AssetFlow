@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AssetFlow.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f231cd6af10636c169aae41e08941c314c33f624")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+14c75e03439777aab9b4f58438a182b6e82f6b08")]
 [assembly: System.Reflection.AssemblyProductAttribute("AssetFlow.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AssetFlow.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

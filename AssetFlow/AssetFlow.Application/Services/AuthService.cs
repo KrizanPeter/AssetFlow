@@ -66,19 +66,21 @@ namespace AssetFlow.Application.Services
             return Result.Ok(new UserDto());
         }
 
-        public async Task<Result<UserDto>> CheckPassAndLogIn(CreateUserDto loginUser)
+        public async Task<Result<UserDto>> CheckPassAndLogIn(AppUser user, string password)
         {
-            var user = _userManager.Users.FirstOrDefault(a => a.Email.ToUpper() == loginUser.Email.ToUpper());
-            if (user == null) return Result.Fail<UserDto>("User does not exist.");
+            var domainUser = _userManager.Users.FirstOrDefault(predicate: a => a.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase));
+            
+            if (domainUser == null) 
+                return Result.Fail<UserDto>("User does not exist.");
 
-            var result = await _signInManager.CheckPasswordSignInAsync(user, loginUser.Password, false);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
             if (!result.Succeeded)
             {
                 return Result.Fail<UserDto>("Wrong password.");
             }
 
-            var loggedUser = _mapper.Map<UserDto>(user);
-            loggedUser.Token = _tokenService.GetToken(user);
+            var loggedUser = _mapper.Map<UserDto>(domainUser);
+            loggedUser.Token = _tokenService.GetToken(domainUser);
 
             return Result.Ok(loggedUser);
         }

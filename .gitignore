@@ -1,3 +1,4 @@
+
 # Visual Studio cache
 .vs/
 *.slnx
@@ -5,7 +6,12 @@
 
 # Build output
 bin/
+.bin/
 obj/
+.obj/
+**/obj/
+**/bin/
+
 
 # User-specific settings
 *.user

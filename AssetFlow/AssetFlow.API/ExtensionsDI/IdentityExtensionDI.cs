@@ -13,7 +13,8 @@ namespace AssetFlow.API.Extensions
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<IdentityContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("IdentityConnection")));
+                options.UseNpgsql(configuration.GetConnectionString("IdentityConnection"),
+                b => b.MigrationsAssembly("AssetFlow.Persistence")));
 
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<IdentityContext>()
