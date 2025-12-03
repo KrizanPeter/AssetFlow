@@ -23,23 +23,6 @@ namespace AssetFlow.Persistence.Migrations.Identity
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("AssetFlow.Domain.Entities.Account", b =>
-                {
-                    b.Property<Guid>("AccountId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AppUserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("AccountId");
-
-                    b.HasIndex("AppUserId")
-                        .IsUnique();
-
-                    b.ToTable("Account", "IdentitySchema");
-                });
-
             modelBuilder.Entity("AssetFlow.Domain.Entities.Auth.AppRole", b =>
                 {
                     b.Property<Guid>("Id")
@@ -259,17 +242,6 @@ namespace AssetFlow.Persistence.Migrations.Identity
                     b.ToTable("AspNetUserTokens", "IdentitySchema");
                 });
 
-            modelBuilder.Entity("AssetFlow.Domain.Entities.Account", b =>
-                {
-                    b.HasOne("AssetFlow.Domain.Entities.Auth.AppUser", "AppUser")
-                        .WithOne("Account")
-                        .HasForeignKey("AssetFlow.Domain.Entities.Account", "AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("AssetFlow.Domain.Entities.Auth.AppUserRole", b =>
                 {
                     b.HasOne("AssetFlow.Domain.Entities.Auth.AppRole", "AppRole")
@@ -332,8 +304,6 @@ namespace AssetFlow.Persistence.Migrations.Identity
 
             modelBuilder.Entity("AssetFlow.Domain.Entities.Auth.AppUser", b =>
                 {
-                    b.Navigation("Account");
-
                     b.Navigation("AppUserRoles");
                 });
 #pragma warning restore 612, 618

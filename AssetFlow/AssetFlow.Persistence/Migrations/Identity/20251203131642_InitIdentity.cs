@@ -85,26 +85,6 @@ namespace AssetFlow.Persistence.Migrations.Identity
                 });
 
             migrationBuilder.CreateTable(
-                name: "Account",
-                schema: "IdentitySchema",
-                columns: table => new
-                {
-                    AccountId = table.Column<Guid>(type: "uuid", nullable: false),
-                    AppUserId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Account", x => x.AccountId);
-                    table.ForeignKey(
-                        name: "FK_Account_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalSchema: "IdentitySchema",
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 schema: "IdentitySchema",
                 columns: table => new
@@ -202,13 +182,6 @@ namespace AssetFlow.Persistence.Migrations.Identity
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Account_AppUserId",
-                schema: "IdentitySchema",
-                table: "Account",
-                column: "AppUserId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 schema: "IdentitySchema",
                 table: "AspNetRoleClaims",
@@ -256,10 +229,6 @@ namespace AssetFlow.Persistence.Migrations.Identity
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Account",
-                schema: "IdentitySchema");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims",
                 schema: "IdentitySchema");

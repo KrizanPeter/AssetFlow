@@ -3,4 +3,7 @@
   <Project Path="AssetFlow.Application/AssetFlow.Application.csproj" />
   <Project Path="AssetFlow.Domain/AssetFlow.Domain.csproj" />
   <Project Path="AssetFlow.Persistence/AssetFlow.Persistence.csproj" />
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
 </Solution>

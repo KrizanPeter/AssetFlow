@@ -1,4 +1,5 @@
-﻿using AssetFlow.API.ExtensionsDI;
+﻿using AssetFlow.API.Extensions;
+using AssetFlow.API.ExtensionsDI;
 using AssetFlow.Application.Dtos;
 using AssetFlow.Application.MediatR.Commands;
 using FluentResults;
@@ -27,12 +28,9 @@ namespace AssetFlow.API.Endpoints
             try
             {
                 var user = await mediator.Send(CreateUserCommand.Of(registerDto), ct);
-
-                if (user.IsSuccess)
-                    return Results.Created($"/users/{user.Value.Id}", user.Value.Id);
-
                 return user.ToApiResult();
             }
+
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error registering user");

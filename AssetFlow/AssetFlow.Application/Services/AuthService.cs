@@ -1,4 +1,5 @@
 ﻿using AssetFlow.Application.Dtos;
+using AssetFlow.Application.Errors;
 using AssetFlow.Application.Interfaces.IRepositories;
 using AssetFlow.Application.Interfaces.IServices;
 using AssetFlow.Domain.Entities.Auth;
@@ -7,24 +8,25 @@ using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AssetFlow.Application.Services
 {
     public class AuthService : IAuthService
     {
         private readonly ILogger<AuthService> _logger;
-        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        //private readonly IAccountService _accountService;
-        public AuthService(ILogger<AuthService> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            ITokenService tokenService, /*IAccountService accountService*/ IMapper mapper)
+
+        public AuthService(ILogger<AuthService> logger,
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
+            ITokenService tokenService,
+            IMapper mapper)
         {
-            //_accountService = accountService;
             _logger = logger;
             _tokenService = tokenService;
             _mapper = mapper;
@@ -34,49 +36,35 @@ namespace AssetFlow.Application.Services
 
         public async Task<Result<UserDto>> RegisterNewUserAsync(AppUser user, string password)
         {
-
-            user.DateOfCreation = DateTime.Now;
-            user.DateOfLastModification = DateTime.Now;
+            user.DateOfCreation = DateTime.UtcNow;
+            user.DateOfLastModification = DateTime.UtcNow;
 
             var result = await _userManager.CreateAsync(user, password);
 
             if (!result.Succeeded)
             {
-                var msg = string.Join(String.Empty, result.Errors.Select(a => a.Description).ToList());
-                return Result.Fail<UserDto>(msg);
+                var reasons = result.Errors.Select(a => new Error(a.Description)).ToList();
+                return Result.Fail<UserDto>(ValidationError.Of("UserValidation", "Validation failed", reasons));
             }
 
-            //var accountResult = await _accountService.CreateNewAccountForUser(userEntity.Id);
-
-            //if (accountResult.IsFailure)
-            //{
-            //    return Result.Fail<UserDto>(accountResult.Error);
-            //}
-
-            //var updatedUserEntity = _userRepository.UpdateAccountId(userEntity.Id, accountResult.Value.AccountId);
-
-            //if (updatedUserEntity.IsSuccess)
-            //{
-            //    var registeredUser = _mapper.Map<UserDto>(updatedUserEntity.Value);
-            //    registeredUser.Token = _tokenService.GetToken(userEntity);
-            //    return await CheckPassAndLogIn(registerDto);
-            //}
-            //return Result.Fail<UserDto>(updatedUserEntity.Error);
-            return Result.Ok(new UserDto());
+            // After successful creation, automatically attempt to log the user in and return the logged in DTO (with token)
+            return await CheckPassAndLogIn(user, password);
         }
 
         public async Task<Result<UserDto>> CheckPassAndLogIn(AppUser user, string password)
         {
-            var domainUser = _userManager.Users.FirstOrDefault(predicate: a => a.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase));
-            
-            if (domainUser == null) 
+            if (user == null || string.IsNullOrWhiteSpace(user.Email))
+                return Result.Fail<UserDto>("Invalid credentials.");
+
+            // Find the persisted user record (async, uses identity store)
+            var domainUser = await _userManager.FindByEmailAsync(user.Email);
+            if (domainUser == null)
                 return Result.Fail<UserDto>("User does not exist.");
 
-            var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
-            if (!result.Succeeded)
-            {
+            // Validate password against the persisted user
+            var signInResult = await _signInManager.CheckPasswordSignInAsync(domainUser, password, lockoutOnFailure: false);
+            if (!signInResult.Succeeded)
                 return Result.Fail<UserDto>("Wrong password.");
-            }
 
             var loggedUser = _mapper.Map<UserDto>(domainUser);
             loggedUser.Token = _tokenService.GetToken(domainUser);

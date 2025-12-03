@@ -1,81 +1,96 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AssetFlow.Application.Errors;
 using FluentResults;
-using Microsoft.IdentityModel.Tokens.Experimental;
+using Microsoft.AspNetCore.Mvc;
 
-namespace AssetFlow.API.ExtensionsDI
+namespace AssetFlow.API.Extensions
 {
     public static class ResultExtensions
     {
         public static IResult ToApiResult<T>(this Result<T> result)
         {
-            if (result == null)
-                return Results.Problem("Result is null.");
-
             if (result.IsSuccess)
-                return Results.Ok(result.Value);
-            var errors = result.Errors.Select(e => new { e.Message, e.Metadata }).ToList();
+                return Results.Ok(new { data = result.Value });
+
             var error = result.Errors.FirstOrDefault();
-            if (error == null)
-                return Results.Problem("An unknown error occurred.");
 
-            // Determine the runtime type name to avoid compile-time dependency on specific error classes.
-            var typeName = error.GetType().Name;
-
-            if (string.Equals(typeName, "ValidationError", StringComparison.OrdinalIgnoreCase))
+            return error switch
             {
-                // Try to extract a property name if present (handle several possible shapes via reflection).
-                string? property = null;
-
-                // 1) Look for a direct property named "Property" or "PropertyName".
-                var propInfo = error.GetType().GetProperty("Property") ?? error.GetType().GetProperty("PropertyName");
-                if (propInfo != null)
+                ValidationError => Results.BadRequest(new ProblemDetails
                 {
-                    property = propInfo.GetValue(error)?.ToString();
-                }
-                else
-                {
-                    // 2) Look for a Metadata property that may be a dictionary.
-                    var metaProp = error.GetType().GetProperty("Metadata");
-                    if (metaProp != null)
+                    Type = "https://httpstatuses.com/400",
+                    Title = "Validation failed",
+                    Status = StatusCodes.Status400BadRequest,
+                    Detail = "One or more validation errors occurred.",
+                    Extensions =
                     {
-                        var metaVal = metaProp.GetValue(error);
-                        // If it's a generic IDictionary<string, object>
-                        if (metaVal is IDictionary<string, object> dict)
-                        {
-                            if (dict.TryGetValue("Property", out var v) || dict.TryGetValue("PropertyName", out v))
-                                property = v?.ToString();
-                        }
-                        else if (metaVal is IDictionary nonGenDict) // non-generic IDictionary
-                        {
-                            if (nonGenDict.Contains("Property"))
-                                property = nonGenDict["Property"]?.ToString();
-                            else if (nonGenDict.Contains("PropertyName"))
-                                property = nonGenDict["PropertyName"]?.ToString();
-                        }
-                        // else: unknown metadata shape — ignore gracefully.
+                        ["errors"] = error.Reasons
+                            .Select(e => new { property = ((ValidationError)error).Property,  message = e.Message })
+                            .ToList()
                     }
-                }
+                }),
 
-                // Return BadRequest with Message and optional Property key (nulls are fine in anonymous objects).
-                return Results.BadRequest(new { error.Message, Property = property });
-            }
+                NotFoundError nf => Results.NotFound(new ProblemDetails
+                {
+                    Type = "https://httpstatuses.com/404",
+                    Title = "Resource not found",
+                    Status = StatusCodes.Status404NotFound,
+                    Detail = nf.Message
+                }),
 
-            if (string.Equals(typeName, "NotFoundError", StringComparison.OrdinalIgnoreCase))
-            {
-                return Results.NotFound(new { error.Message });
-            }
+                BusinessError be => Results.UnprocessableEntity(new ProblemDetails
+                {
+                    Type = "https://httpstatuses.com/422",
+                    Title = "Business rule violation",
+                    Status = StatusCodes.Status422UnprocessableEntity,
+                    Detail = be.Message
+                }),
 
-            if (string.Equals(typeName, "BusinessError", StringComparison.OrdinalIgnoreCase))
-            {
-                return Results.UnprocessableEntity(new { error.Message });
-            }
+                UnauthorizedError ue => Results.Json(
+                    new ProblemDetails
+                    {
+                        Type = "https://httpstatuses.com/401",
+                        Title = "Unauthorized",
+                        Status = StatusCodes.Status401Unauthorized,
+                        Detail = ue.Message
+                    },
+                    statusCode: StatusCodes.Status401Unauthorized
+                ),
 
-            // Fallback: aggregate messages into a single string because Results.Problem expects a string detail.
-            var aggregated = string.Join("; ", result.Errors.Select(e => e.Message));
-            return Results.Problem(aggregated);
+                ForbiddenError fe => Results.Json(
+                    new ProblemDetails
+                    {
+                        Type = "https://httpstatuses.com/403",
+                        Title = "Forbidden",
+                        Status = StatusCodes.Status403Forbidden,
+                        Detail = fe.Message
+                    },
+                    statusCode: StatusCodes.Status403Forbidden
+                ),
+
+                ConflictError ce => Results.Conflict(new ProblemDetails
+                {
+                    Type = "https://httpstatuses.com/409",
+                    Title = "Conflict",
+                    Status = StatusCodes.Status409Conflict,
+                    Detail = ce.Message
+                }),
+
+                SystemError se => Results.Problem(new ProblemDetails
+                {
+                    Type = "https://httpstatuses.com/500",
+                    Title = "Unexpected error",
+                    Status = StatusCodes.Status500InternalServerError,
+                    Detail = se.Message
+                }),
+
+                _ => Results.Problem(new ProblemDetails
+                {
+                    Type = "https://httpstatuses.com/500",
+                    Title = "Unhandled error",
+                    Status = StatusCodes.Status500InternalServerError,
+                    Detail = string.Join("; ", result.Errors.Select(e => e.Message))
+                })
+            };
         }
     }
 }

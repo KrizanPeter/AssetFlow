@@ -28,11 +28,6 @@ namespace AssetFlow.Persistence.Contexts
                 .WithOne(u => u.AppRole)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
-
-            builder.Entity<AppUser>()
-                .HasOne(a => a.Account)
-                .WithOne(a => a.AppUser)
-                .HasForeignKey<Account>(c => c.AppUserId);
         }
     }
 }

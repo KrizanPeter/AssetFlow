@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  assetflow.api:
+    build:
+      context: .
+      dockerfile: AssetFlow.API/Dockerfile
+    image: assetflow.api:dev
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      # override connection string if needed:
+      # ConnectionStrings__IdentityConnection: "Host=postgres;Port=5432;Database=assetflowDb;Username=postgres;Password=YourStrongPassword"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: assetflowDb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d assetflowDb"]
+      interval: 10s
+      timeout: 5s
+      retries: 10

@@ -8,7 +8,5 @@ namespace AssetFlow.Domain.Entities
         public Guid AccountId { get; set; }
         public Guid AppUserId { get; set; }
 
-        [JsonIgnore]
-        public virtual required AppUser AppUser { get; set; }
     }
 }

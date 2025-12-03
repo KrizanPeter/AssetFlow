@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AssetFlow.Persistence.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20251201181216_InitIdentity")]
+    [Migration("20251203131642_InitIdentity")]
     partial class InitIdentity
     {
         /// <inheritdoc />
@@ -25,23 +25,6 @@ namespace AssetFlow.Persistence.Migrations.Identity
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("AssetFlow.Domain.Entities.Account", b =>
-                {
-                    b.Property<Guid>("AccountId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AppUserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("AccountId");
-
-                    b.HasIndex("AppUserId")
-                        .IsUnique();
-
-                    b.ToTable("Account", "IdentitySchema");
-                });
 
             modelBuilder.Entity("AssetFlow.Domain.Entities.Auth.AppRole", b =>
                 {
@@ -262,17 +245,6 @@ namespace AssetFlow.Persistence.Migrations.Identity
                     b.ToTable("AspNetUserTokens", "IdentitySchema");
                 });
 
-            modelBuilder.Entity("AssetFlow.Domain.Entities.Account", b =>
-                {
-                    b.HasOne("AssetFlow.Domain.Entities.Auth.AppUser", "AppUser")
-                        .WithOne("Account")
-                        .HasForeignKey("AssetFlow.Domain.Entities.Account", "AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("AssetFlow.Domain.Entities.Auth.AppUserRole", b =>
                 {
                     b.HasOne("AssetFlow.Domain.Entities.Auth.AppRole", "AppRole")
@@ -335,8 +307,6 @@ namespace AssetFlow.Persistence.Migrations.Identity
 
             modelBuilder.Entity("AssetFlow.Domain.Entities.Auth.AppUser", b =>
                 {
-                    b.Navigation("Account");
-
                     b.Navigation("AppUserRoles");
                 });
 #pragma warning restore 612, 618
