@@ -1,6 +1,6 @@
 ﻿using AssetFlow.Domain.Entities.Auth;
 
-namespace AssetFlow.Application.Interfaces.IRepositories
+namespace AssetFlow.Application.Interfaces.IRepositories.Auth
 {
     public interface IUserRepository : IRepository<AppUser>
     {

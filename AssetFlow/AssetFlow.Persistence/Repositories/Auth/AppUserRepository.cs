@@ -1,11 +1,8 @@
-﻿using AssetFlow.Application.Interfaces.IRepositories;
+﻿using AssetFlow.Application.Interfaces.IRepositories.Auth;
 using AssetFlow.Domain.Entities.Auth;
 using AssetFlow.Persistence.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace AssetFlow.Persistence.Repositories
+namespace AssetFlow.Persistence.Repositories.Auth
 {
     public class UserRepository : Repository<AppUser>, IUserRepository
     {

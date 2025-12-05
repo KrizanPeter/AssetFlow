@@ -1,12 +1,13 @@
-﻿using AssetFlow.Domain.Entities.Auth;
-using System.Text.Json.Serialization;
-
+﻿
 namespace AssetFlow.Domain.Entities
 {
-    public class Account
+    public class Account : IEntity
     {
-        public Guid AccountId { get; set; }
+        public Guid Id { get; set; }
         public Guid AppUserId { get; set; }
+        public AccountSettings AccountSettings { get; set; } = new AccountSettings();
+        public DateTime DateOfCreation { get; set; }
+        public DateTime DateOfLastModification { get; set; }
 
     }
 }

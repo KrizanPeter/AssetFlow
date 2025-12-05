@@ -10,10 +10,11 @@ namespace AssetFlow.API.Endpoints
 {
     public class AuthEndpoints
     {
+        private const string SWAGGER_TAG = "Authentication";
         public static IEndpointRouteBuilder RegisterUserRoutes (IEndpointRouteBuilder endpoints)
         {
-            endpoints.MapPost("/api/user/register", RegisterUser);
-            endpoints.MapPost("/api/user/login", LoginUser);
+            endpoints.MapPost("/api/user/register", RegisterUser).WithTags(SWAGGER_TAG);
+            endpoints.MapPost("/api/user/login", LoginUser).WithTags(SWAGGER_TAG);
 
             return endpoints;
         }

@@ -36,6 +36,7 @@ namespace AssetFlow.Application.Services
 
         public async Task<Result<UserDto>> RegisterNewUserAsync(AppUser user, string password)
         {
+            user.AccountId = Guid.NewGuid();
             user.DateOfCreation = DateTime.UtcNow;
             user.DateOfLastModification = DateTime.UtcNow;
 

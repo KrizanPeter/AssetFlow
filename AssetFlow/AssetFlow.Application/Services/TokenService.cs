@@ -35,6 +35,7 @@ namespace AssetFlow.Application.Services
             var claims = new List<Claim>
             {
                 new Claim("urn:assetflow:usser_Id", userId),
+
                 new Claim("urn:assetflow:account_Id", accountId),
             };
 

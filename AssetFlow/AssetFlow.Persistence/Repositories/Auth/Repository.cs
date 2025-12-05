@@ -1,13 +1,9 @@
 ﻿using AssetFlow.Application.Interfaces.IRepositories;
 using AssetFlow.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
-namespace AssetFlow.Persistence.Repositories
+namespace AssetFlow.Persistence.Repositories.Auth
 {
     public class Repository<T> : IRepository<T> where T : class
     {
