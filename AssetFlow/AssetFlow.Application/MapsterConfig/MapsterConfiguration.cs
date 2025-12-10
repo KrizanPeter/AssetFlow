@@ -1,6 +1,7 @@
-﻿using AssetFlow.Application.Dtos;
+﻿using AssetFlow.Application.Dtos.Auth;
 using AssetFlow.Application.MediatR.Commands;
 using AssetFlow.Domain.Entities.Auth;
+using AssetFlow.Domain.Events;
 using Mapster;
 
 namespace AssetFlow.Application.MapsterConfig
@@ -18,6 +19,9 @@ namespace AssetFlow.Application.MapsterConfig
             config.NewConfig<LoginUserDto, AppUser>();
 
             config.NewConfig<CreateUserCommand, AppUser>();
+
+            //Events mapping
+            config.NewConfig<CreateAssetCommand, AssetCreated>();
     
 
         }

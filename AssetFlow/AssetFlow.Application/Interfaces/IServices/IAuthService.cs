@@ -1,4 +1,4 @@
-﻿using AssetFlow.Application.Dtos;
+﻿using AssetFlow.Application.Dtos.Auth;
 using AssetFlow.Application.MediatR.Commands;
 using AssetFlow.Domain.Entities.Auth;
 using FluentResults;

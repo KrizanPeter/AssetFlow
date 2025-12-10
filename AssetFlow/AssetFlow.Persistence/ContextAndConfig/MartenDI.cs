@@ -1,5 +1,7 @@
-﻿using AssetFlow.Domain.Entities;
+﻿using AssetFlow.Domain.Entities.DocumentEntities;
+using AssetFlow.Domain.Events;
 using JasperFx;
+using JasperFx.Events;
 using Marten;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,16 +16,23 @@ namespace AssetFlow.Persistence.ExtensionsDI
             {
                 options.Connection(configuration.GetConnectionString("DomainConnection"));
 
-                // Optional: schema name for documents
+                // Schema for documents
                 options.DatabaseSchemaName = "DomainDb";
 
                 // Auto-create schema objects on startup
                 options.AutoCreateSchemaObjects = AutoCreate.All;
 
-                // Example: add a document type explicitly
+                // Document entity configuration
                 options.Schema.For<Account>().Identity(x => x.Id);
+
+                // --- Event store configuration ---
+                options.Events.DatabaseSchemaName = "EventDb"; // separate schema for events
+                options.Events.StreamIdentity = StreamIdentity.AsGuid; // or AsString if you prefer
+
+                // Register your event types (Asset events)
+                options.Events.AddEventType<AssetCreated>();
+                // add more event classes as needed
             });
         }
-
     }
 }

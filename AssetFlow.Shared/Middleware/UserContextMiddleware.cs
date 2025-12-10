@@ -21,8 +21,13 @@ namespace AssetFlow.Shared.Middleware
                 var userId = user.FindFirst("urn:assetflow:usser_Id")?.Value;
                 var accountId = user.FindFirst("urn:assetflow:account_Id")?.Value;
 
-                userContext.UserId = userId ?? string.Empty;
-                userContext.AccountId = accountId ?? string.Empty; 
+                userContext.UserId = Guid.TryParse(userId, out var parsedUserId)
+                    ? parsedUserId
+                    : Guid.Empty;
+
+                userContext.AccountId = Guid.TryParse(accountId, out var parsedAccountId)
+                    ? parsedAccountId
+                    : Guid.Empty;
             }
 
             await _next(httpContext);

@@ -16,6 +16,9 @@ services:
       ConnectionStrings__IdentityConnection: "Host=postgres;Port=5432;Database=assetflowDb;Username=myuser;Password=mypassword"
       # Marten connection string (DomainConnection)
       ConnectionStrings__DomainConnection: "Host=postgres;Port=5432;Database=assetflowDb;Username=myuser;Password=mypassword"
+      # Marten connection string (DomainConnection)
+      ConnectionStrings__EventConnection: "Host=postgres;Port=5432;Database=assetflowDb;Username=myuser;Password=mypassword"
+
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

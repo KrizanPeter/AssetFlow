@@ -1,7 +1,6 @@
-﻿using AssetFlow.Application.Dtos;
+﻿using AssetFlow.Application.Dtos.Auth;
 using FluentResults;
 using MediatR;
-
 
 namespace AssetFlow.Application.MediatR.Commands
 {

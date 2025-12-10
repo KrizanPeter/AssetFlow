@@ -3,7 +3,7 @@ namespace AssetFlow.Shared.Contexts
 {
     public class UserContext : IUserContext
     {
-        public string UserId { get; set; } = string.Empty;
-        public string AccountId { get; set; } = string.Empty;
+        public Guid UserId { get; set; } = Guid.Empty;
+        public Guid AccountId { get; set; } = Guid.Empty;
     }
 }

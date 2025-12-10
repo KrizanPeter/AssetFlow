@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AssetFlow.Application.Dtos
+namespace AssetFlow.Application.Dtos.Auth
 {
     public class AccountDto
     {

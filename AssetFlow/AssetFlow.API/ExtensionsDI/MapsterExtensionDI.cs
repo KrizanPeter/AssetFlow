@@ -12,6 +12,7 @@ namespace AssetFlow.API.Extensions
 
             services.AddSingleton(config);
             services.AddScoped<IMapper, ServiceMapper>();
+
             
             return services;
         }

@@ -1,5 +1,5 @@
 ﻿using AssetFlow.Application.Interfaces.IServices;
-using AssetFlow.Domain.Entities;
+using AssetFlow.Domain.Entities.DocumentEntities;
 using FluentResults;
 
 namespace AssetFlow.Application.Services

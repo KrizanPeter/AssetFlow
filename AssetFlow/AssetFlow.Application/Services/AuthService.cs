@@ -1,4 +1,4 @@
-﻿using AssetFlow.Application.Dtos;
+﻿using AssetFlow.Application.Dtos.Auth;
 using AssetFlow.Application.Errors;
 using AssetFlow.Application.Interfaces.IRepositories;
 using AssetFlow.Application.Interfaces.IServices;

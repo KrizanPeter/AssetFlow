@@ -1,8 +1,6 @@
 ﻿using AssetFlow.API.Extensions;
-using AssetFlow.API.ExtensionsDI;
-using AssetFlow.Application.Dtos;
+using AssetFlow.Application.Dtos.Auth;
 using AssetFlow.Application.MediatR.Commands;
-using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

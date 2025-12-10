@@ -21,6 +21,7 @@ namespace AssetFlow.API.ExtensionsDI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IDocumentRepositoryDb<>), typeof(DocumentRepositoryDb<>)); 
             services.AddScoped<IUserContext, UserContext>();
+            services.AddScoped<IEventRepository, EventRepository>();
             return services;
         }
     }

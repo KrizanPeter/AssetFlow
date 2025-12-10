@@ -6,7 +6,7 @@ namespace AssetFlow.Shared.Contexts
 {
     public interface IUserContext
     {
-        string UserId { get; set; }
-        string AccountId { get; set; }
+        Guid UserId { get; set; }
+        Guid AccountId { get; set; }
     }
 }

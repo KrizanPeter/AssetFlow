@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AssetFlow.Application.Dtos;
+using AssetFlow.Application.Dtos.Auth;
 using AssetFlow.Application.Interfaces.IServices;
 using AssetFlow.Domain.Entities.Auth;
 using FluentResults;

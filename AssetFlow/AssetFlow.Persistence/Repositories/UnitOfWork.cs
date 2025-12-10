@@ -1,6 +1,6 @@
 ﻿using AssetFlow.Application.Interfaces.IRepositories;
 using AssetFlow.Application.Interfaces.IServices;
-using AssetFlow.Domain.Entities;
+using AssetFlow.Domain.Entities.DocumentEntities;
 using Marten;
 
 namespace AssetFlow.Persistence.Repositories
@@ -9,13 +9,17 @@ namespace AssetFlow.Persistence.Repositories
     {
         private readonly IDocumentSession _session;
 
-        public UnitOfWork(IDocumentSession session, IDocumentRepositoryDb<Account> accountRepository)
+        public UnitOfWork(IDocumentSession session,
+            IDocumentRepositoryDb<Account> accountRepository,
+            IEventRepository eventRepository)
         {
             _session = session;
             Accounts = accountRepository;
+            Events = eventRepository;
         }
 
         public IDocumentRepositoryDb<Account> Accounts { get; }
+        public IEventRepository Events {get;}
 
 
         public Task CommitAsync() => _session.SaveChangesAsync();

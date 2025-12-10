@@ -1,5 +1,4 @@
-﻿
-namespace AssetFlow.Application.Dtos
+﻿namespace AssetFlow.Application.Dtos.Auth
 {
     public class UserDto
     {

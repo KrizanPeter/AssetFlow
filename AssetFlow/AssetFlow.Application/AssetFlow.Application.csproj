@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AssetFlow.Shared\AssetFlow.Shared.csproj" />
     <ProjectReference Include="..\AssetFlow.Domain\AssetFlow.Domain.csproj" />
   </ItemGroup>
 
