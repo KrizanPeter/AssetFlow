@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="../AssetFlow.Shared/AssetFlow.Shared.csproj" Id="d74c1c78-6943-4e97-b0b8-cda8e5e70748" />
   <Project Path="AssetFlow.API/AssetFlow.API.csproj" />
   <Project Path="AssetFlow.Application/AssetFlow.Application.csproj" />
   <Project Path="AssetFlow.Domain/AssetFlow.Domain.csproj" />

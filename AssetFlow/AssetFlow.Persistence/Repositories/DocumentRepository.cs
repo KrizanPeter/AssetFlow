@@ -15,6 +15,7 @@ namespace AssetFlow.Persistence.Repositories
         public Task<T?> GetByIdAsync(Guid id) =>
             _session.LoadAsync<T>(id);
 
+        // Immediate commit methods
         public async Task AddAsync(T document)
         {
             _session.Store(document);
@@ -36,5 +37,30 @@ namespace AssetFlow.Persistence.Repositories
                 await _session.SaveChangesAsync();
             }
         }
+
+        // Transactional equivalents (queue only, no commit yet)
+        public Task TransactionalAddAsync(T document)
+        {
+            _session.Store(document);
+            return Task.CompletedTask;
+        }
+
+        public Task TransactionalUpdateAsync(T document)
+        {
+            _session.Store(document);
+            return Task.CompletedTask;
+        }
+
+        public async Task TransactionalDeleteAsync(Guid id)
+        {
+            var entity = await _session.LoadAsync<T>(id);
+            if (entity != null)
+            {
+                _session.Delete(entity);
+            }
+        }
+
+        // Commit all queued transactional operations
+        public Task CommitAsync() => _session.SaveChangesAsync();
     }
 }

@@ -3,6 +3,7 @@ using AssetFlow.API.Extensions;
 using AssetFlow.API.ExtensionsDI;
 using AssetFlow.Application.MediatR.Commands;
 using AssetFlow.Persistence.ExtensionsDI;
+using AssetFlow.Shared.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,8 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateUserCommand).Assembly));
 
 var app = builder.Build();
+
+app.UseMiddleware<UserContextMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
