@@ -1,5 +1,6 @@
 ﻿using AssetFlow.Shared.Contexts;
 using Microsoft.AspNetCore.Http;
+using System.Net;
 
 namespace AssetFlow.Shared.Middleware
 {
@@ -29,8 +30,14 @@ namespace AssetFlow.Shared.Middleware
                     ? parsedAccountId
                     : Guid.Empty;
             }
+            else if(!httpContext.Request.Path.Value.Contains("/api/user/"))
+            {
+                httpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                await httpContext.Response.WriteAsync("Invalid Token");
+                return;
+            }
 
-            await _next(httpContext);
+                await _next(httpContext);
         }
     }
 }

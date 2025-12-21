@@ -4,7 +4,7 @@ using MediatR;
 
 namespace AssetFlow.Application.MediatR.Commands
 {
-    public record CreateAssetCommand(string AssetName, AssetType TypeOfAsset, string UnitType) : IRequest<Result<AssetDto>>
+    public record CreateAssetCommand(string AssetName, AssetType TypeOfAsset, string UnitType) : IRequest<Result<Guid>>
     {
         public static CreateAssetCommand Of(CreateAssetDto dto) =>
             new(dto.AssetName, dto.TypeOfAsset, dto.UnitType);

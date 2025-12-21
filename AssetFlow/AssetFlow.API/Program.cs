@@ -14,18 +14,19 @@ MapsterExtensionDI.AddMapsterServices(builder.Services);
 ApplicationDependenciesDI.AddAppDependencies(builder.Services, builder.Configuration);
 SwaggerDependenciesDI.AddSwaggerServices(builder.Services, builder.Configuration);
 MartenDI.AddMartenServices(builder.Services, builder.Configuration);
+AuthDI.AddAuthConfiguration(builder.Services, builder.Configuration);
+JwtExtensionDI.AddJwtAuthentication(builder.Services, builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddEndpointsApiExplorer();
+
 
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateUserCommand).Assembly));
 
 var app = builder.Build();
 
-app.UseMiddleware<UserContextMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
@@ -41,13 +42,24 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
-app.UseIdentityServer();
 
-app.UseAuthorization();
+app.UseCors(policy =>
+{
+    policy.AllowAnyOrigin()
+          .AllowAnyHeader()
+          .AllowAnyMethod();
+});
+
+//app.UseIdentityServer();
 app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseMiddleware<UserContextMiddleware>();
+
 app.UseEndpoints(endpoints =>
 {
-    IEndpointRouteBuilder registeredRouteBuilder = AuthEndpoints.RegisterUserRoutes(endpoints);
+    _ = AuthEndpoints.RegisterUserRoutes(endpoints);
+    _ = AssetEndpoints.RegisterAssetRoutes(endpoints);
 });
 
 app.Run();

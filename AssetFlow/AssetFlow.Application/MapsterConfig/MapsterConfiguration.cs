@@ -21,8 +21,8 @@ namespace AssetFlow.Application.MapsterConfig
             config.NewConfig<CreateUserCommand, AppUser>();
 
             //Events mapping
-            config.NewConfig<CreateAssetCommand, AssetCreated>();
-    
+            config.NewConfig<CreateAssetCommand, SnapshotAssetCreated>();
+            config.NewConfig<CreateAssetCommand, LedgerAssetCreated>();
 
         }
     }

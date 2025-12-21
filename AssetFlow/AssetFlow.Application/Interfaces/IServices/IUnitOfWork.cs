@@ -9,6 +9,8 @@ namespace AssetFlow.Application.Interfaces.IServices
     public interface IUnitOfWork
     {
         IDocumentRepositoryDb<Account> Accounts { get; }
+        IEventRepository Events { get; }
+
         Task CommitAsync();
 
     }

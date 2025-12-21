@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AssetFlow.Application.MediatR.Commands.Handlers
 {
-    internal class CreateAssetCommandHandler : IRequestHandler<CreateAssetCommand, Result<AssetDto>>
+    internal class CreateAssetCommandHandler : IRequestHandler<CreateAssetCommand, Result<Guid>>
     {
 
         private readonly ILogger<CreateAssetCommandHandler> _logger;
@@ -28,26 +28,46 @@ namespace AssetFlow.Application.MediatR.Commands.Handlers
             _userContext = userContext;
         }
 
-        public async Task<Result<AssetDto>> Handle(CreateAssetCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Guid>> Handle(CreateAssetCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 var accountId = _userContext.AccountId;
-                var assetToCreate = _mapper.Map<AssetCreated>(request);
-
-                AssetCreated assetCreatedEvent = assetToCreate with
+                return request.TypeOfAsset switch
                 {
-                    AccountId = accountId,
-                    AssetId = Guid.NewGuid()
+                    AssetType.Snapshot => await HandleSnapshot(request, accountId),
+                    AssetType.Ledger => await HandleLedger(request, accountId),
+                    _ => throw new ArgumentOutOfRangeException(nameof(request.TypeOfAsset))
                 };
-
-                return Result.Ok();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error creating user");
                 throw;
             }
+        }
+
+        private async Task<Result<Guid>> HandleSnapshot(CreateAssetCommand request, Guid accountId)
+        {
+            var evt = _mapper.Map<SnapshotAssetCreated>(request) with
+            {
+                AccountId = accountId,
+                AssetId = Guid.NewGuid()
+            };
+
+            return await _assetService.CreateAsset(evt);
+        }
+
+        private async Task<Result<Guid>> HandleLedger(CreateAssetCommand request, Guid accountId)
+        {
+            var evt = _mapper.Map<LedgerAssetCreated>(request) with
+            {
+                AccountId = accountId,
+                AssetId = Guid.NewGuid()
+            };
+
+            return await _assetService.CreateAsset(evt);
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AssetFlow.Domain.Entities.DocumentEntities;
+using AssetFlow.Domain.Entities.EventAggregates;
 using AssetFlow.Domain.Events;
 using JasperFx;
 using JasperFx.Events;
@@ -30,8 +31,9 @@ namespace AssetFlow.Persistence.ExtensionsDI
                 options.Events.StreamIdentity = StreamIdentity.AsGuid; // or AsString if you prefer
 
                 // Register your event types (Asset events)
-                options.Events.AddEventType<AssetCreated>();
-                // add more event classes as needed
+                options.Events.AddEventType<SnapshotAssetCreated>();
+                options.Events.AddEventType<LedgerAssetCreated>();
+
             });
         }
     }

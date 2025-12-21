@@ -13,6 +13,14 @@ namespace AssetFlow.API.Endpoints
         {
             endpoints.MapPost("/api/user/register", RegisterUser).WithTags(SWAGGER_TAG);
             endpoints.MapPost("/api/user/login", LoginUser).WithTags(SWAGGER_TAG);
+            endpoints.MapGet("/auth-test", (HttpContext ctx) =>
+            {
+                return new
+                {
+                    Authenticated = ctx.User.Identity?.IsAuthenticated,
+                    Claims = ctx.User.Claims.Select(c => new { c.Type, c.Value })
+                };
+            }).RequireAuthorization();
 
             return endpoints;
         }
@@ -46,14 +54,14 @@ namespace AssetFlow.API.Endpoints
             HttpContext context, 
             [FromBody] LoginUserDto registerDto, 
             IMediator mediator, 
-            ILogger<AuthEndpoints> logger, 
+            ILogger<AuthEndpoints> logger,  
             CancellationToken ct)
         {
             try
             {
                 var result = await mediator.Send(LoginUserCommand.Of(registerDto), ct);
 
-                return Results.Ok(result);
+                return result.ToApiResult();
             }
             catch (Exception ex)
             {
