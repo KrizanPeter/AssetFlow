@@ -1,4 +1,6 @@
 ﻿
+using Marten;
+
 namespace AssetFlow.Application.Interfaces.IRepositories
 {
     public interface IDocumentRepositoryDb<T> 
@@ -7,5 +9,7 @@ namespace AssetFlow.Application.Interfaces.IRepositories
         Task AddAsync(T document);
         Task UpdateAsync(T document);
         Task DeleteAsync(Guid id);
+        void WithSession(IDocumentSession session);
+
     }
 }

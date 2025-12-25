@@ -11,14 +11,14 @@ namespace AssetFlow.Domain.Entities.EventAggregates
 
         public void Apply(SnapshotAssetCreated e)
         {
-            Id = e.AssetId;
+            Id = e.AssetId; 
             AccountId = e.AccountId;
             AssetName = e.AssetName;
             UnitType = e.UnitType;
             Balance = Decimal.Zero;
 
-            DateOfCreation = DateTime.UtcNow;
-            DateOfLastModification = DateTime.UtcNow;
+            DateOfCreation = e.DateOfCreation;
+            DateOfLastModification = e.DateOfLastModification;
         }
     }
 }

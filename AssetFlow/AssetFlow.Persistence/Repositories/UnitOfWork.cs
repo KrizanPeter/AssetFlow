@@ -16,6 +16,10 @@ namespace AssetFlow.Persistence.Repositories
             _session = session;
             Accounts = accountRepository;
             Events = eventRepository;
+
+            //Setting Same session 
+            Events.WithSession(session);
+            Accounts.WithSession(session);
         }
 
         public IDocumentRepositoryDb<Account> Accounts { get; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Marten;
 
 namespace AssetFlow.Application.Interfaces.IRepositories
 {
@@ -13,6 +14,8 @@ namespace AssetFlow.Application.Interfaces.IRepositories
         //Transactions
         void StartStreamTransactional<TEvent>(Guid streamId, TEvent @event);
         void AppendEventTransactional<TEvent>(Guid streamId, TEvent @event);
+
+        void WithSession(IDocumentSession session);
 
     }
 }

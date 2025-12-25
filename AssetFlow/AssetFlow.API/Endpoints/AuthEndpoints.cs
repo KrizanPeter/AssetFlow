@@ -13,15 +13,6 @@ namespace AssetFlow.API.Endpoints
         {
             endpoints.MapPost("/api/user/register", RegisterUser).WithTags(SWAGGER_TAG);
             endpoints.MapPost("/api/user/login", LoginUser).WithTags(SWAGGER_TAG);
-            endpoints.MapGet("/auth-test", (HttpContext ctx) =>
-            {
-                return new
-                {
-                    Authenticated = ctx.User.Identity?.IsAuthenticated,
-                    Claims = ctx.User.Claims.Select(c => new { c.Type, c.Value })
-                };
-            }).RequireAuthorization();
-
             return endpoints;
         }
 

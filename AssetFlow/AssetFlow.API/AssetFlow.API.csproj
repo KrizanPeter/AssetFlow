@@ -59,26 +59,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Duende.IdentityServer" Version="7.3.2" />
-    <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="7.3.2" />
-    <PackageReference Include="Marten" Version="8.16.2" />
-    <PackageReference Include="MediatR" Version="13.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
+    <PackageReference Include="Duende.IdentityServer" Version="7.4.3" />
+    <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="7.4.3" />
+    <PackageReference Include="Marten" Version="8.16.4" />
+    <PackageReference Include="MediatR" Version="14.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0" />
+    <PackageReference Include="Weasel.Core" Version="8.4.2" />
+    <PackageReference Include="Weasel.Postgresql" Version="8.4.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AssetFlow.Shared\AssetFlow.Shared.csproj" />
     <ProjectReference Include="..\AssetFlow.Application\AssetFlow.Application.csproj" />
     <ProjectReference Include="..\AssetFlow.Persistence\AssetFlow.Persistence.csproj" />
+    <ProjectReference Include="..\AssetFlow.Shared\AssetFlow.Shared.csproj" />
   </ItemGroup>
 
 </Project>

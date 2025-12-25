@@ -1,13 +1,20 @@
 ﻿using AssetFlow.Application.Interfaces.IRepositories;
 using Marten;
+using Microsoft.Extensions.Logging;
 
 namespace AssetFlow.Persistence.Repositories
 {
     public class DocumentRepositoryDb<T> : IDocumentRepositoryDb<T> where T : class
     {
-        private readonly IDocumentSession _session;
+        private readonly ILogger<DocumentRepositoryDb<T>> _logger;
+        private IDocumentSession _session;
 
-        public DocumentRepositoryDb(IDocumentSession session)
+        public DocumentRepositoryDb(ILogger<DocumentRepositoryDb<T>> logger)
+        {
+            _logger = logger;
+        }
+
+        public void WithSession(IDocumentSession session)
         {
             _session = session;
         }

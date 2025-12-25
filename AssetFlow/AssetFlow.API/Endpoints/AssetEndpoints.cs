@@ -1,6 +1,9 @@
 ﻿using AssetFlow.API.Extensions;
 using AssetFlow.Application.Dtos.Asset;
 using AssetFlow.Application.MediatR.Commands;
+using AssetFlow.Application.MediatR.Queries;
+using AssetFlow.Shared.Contexts;
+using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,25 +30,26 @@ namespace AssetFlow.API.Endpoints
             throw new NotImplementedException();
         }
 
-        private static async Task GetAsset(
+        private static async Task<IResult> GetAsset(
             HttpContext context,
             [FromRoute] Guid id,
             IMediator mediator,
             ILogger<AuthEndpoints> logger,
+            IUserContext userContext,
             CancellationToken ct)
         {
             try
             {
-                //var user = await mediator.Send(GetAssetQuery.Of(createAssetDto), ct);
-                return user.ToApiResult();
-            }
+                var asset = await mediator.Send(GetAssetQuery.Of(id));
+                return asset.ToApiResult();
+            } 
 
             catch (Exception ex)
-            {
+             {
                 logger.LogError(ex, "Error registering user");
 
                 return Results.Problem(
-                    detail: "An unexpected error occurred while registering the user.",
+                    detail: "An unexpected error occurred while getting the asset.",
                     statusCode: StatusCodes.Status500InternalServerError,
                     title: "Internal Server Error"
                 );
