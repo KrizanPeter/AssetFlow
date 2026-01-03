@@ -1,9 +1,11 @@
 ﻿using AssetFlow.Application.Dtos.Asset;
 using AssetFlow.Application.Interfaces.IServices;
 using AssetFlow.Domain.Entities.EventAggregates;
+using AssetFlow.Domain.Entities.Projections;
 using AssetFlow.Domain.Events;
 using FluentResults;
 using MapsterMapper;
+using Marten;
 using Microsoft.Extensions.Logging;
 
 
@@ -73,9 +75,28 @@ namespace AssetFlow.Application.Services
             }
         }
 
-        public Task<Result<AssetsDto>> GetAssetsByAccountId(Guid accountId)
+        public async Task<Result<AssetsDto>> GetAssetsByAccountId(Guid accountId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _unitOfWork.QuerySession
+                    .Query<SnapshotAssetView>()
+                    .Where(x => x.AccountId == accountId)
+                    .ToListAsync();
+
+                if (result is null)
+                    throw new KeyNotFoundException($"Asset for {accountId} not found");
+
+                var dtos = _mapper.Map<List<AssetDto>>(result);
+                var returnDto = new AssetsDto() { Assets = dtos };
+
+                return Result.Ok(returnDto);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting assets for accountID {AccountId}", accountId);
+                return Result.Fail("An error occurred while getting the assets.");
+            }
         }
     }
 }

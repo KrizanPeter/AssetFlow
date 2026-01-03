@@ -16,18 +16,34 @@ namespace AssetFlow.API.Endpoints
         {
             endpoints.MapPost("/api/asset/create", CreateAsset).WithTags(SWAGGER_TAG);
             endpoints.MapGet("/api/asset/{id}", GetAsset).WithTags(SWAGGER_TAG);
-            endpoints.MapGet("/api/asset/all", GetAllAssets).WithTags(SWAGGER_TAG);
+            endpoints.MapGet("/api/assets", GetAllAssets).WithTags(SWAGGER_TAG);
 
 
             return endpoints;
         }
 
-        private static async Task GetAllAssets(HttpContext context,
+        private static async Task<IResult> GetAllAssets(HttpContext context,
             IMediator mediator,
             ILogger<AuthEndpoints> logger,
+            IUserContext userContext,
             CancellationToken ct)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var assets = await mediator.Send(GetAssetsQuery.Of(userContext.AccountId));
+                return assets.ToApiResult();
+            }
+
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error registering user");
+
+                return Results.Problem(
+                    detail: "An unexpected error occurred while getting the asset.",
+                    statusCode: StatusCodes.Status500InternalServerError,
+                    title: "Internal Server Error"
+                );
+            }
         }
 
         private static async Task<IResult> GetAsset(
@@ -35,7 +51,6 @@ namespace AssetFlow.API.Endpoints
             [FromRoute] Guid id,
             IMediator mediator,
             ILogger<AuthEndpoints> logger,
-            IUserContext userContext,
             CancellationToken ct)
         {
             try

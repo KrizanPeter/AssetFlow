@@ -1,5 +1,6 @@
 ﻿using AssetFlow.Application.Interfaces.IRepositories;
 using AssetFlow.Domain.Entities.DocumentEntities;
+using Marten;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,7 @@ namespace AssetFlow.Application.Interfaces.IServices
         IEventRepository Events { get; }
 
         Task CommitAsync();
+        IQuerySession QuerySession { get; set; }
 
-    }
+        }
 }

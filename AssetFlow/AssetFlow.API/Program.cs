@@ -60,6 +60,7 @@ app.UseEndpoints(endpoints =>
 {
     _ = AuthEndpoints.RegisterUserRoutes(endpoints);
     _ = AssetEndpoints.RegisterAssetRoutes(endpoints);
+    _ = SnapshotEndpoints.RegisterSnapshotRoutes(endpoints);
 });
 
 app.Run();

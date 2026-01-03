@@ -8,12 +8,15 @@ namespace AssetFlow.Persistence.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly IDocumentSession _session;
+        public IQuerySession QuerySession { get; set; }
 
-        public UnitOfWork(IDocumentSession session,
+        public UnitOfWork(IDocumentSession session, 
+            IQuerySession querySession,
             IDocumentRepositoryDb<Account> accountRepository,
             IEventRepository eventRepository)
         {
             _session = session;
+            QuerySession = querySession;
             Accounts = accountRepository;
             Events = eventRepository;
 
