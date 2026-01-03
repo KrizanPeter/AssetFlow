@@ -15,7 +15,7 @@ namespace AssetFlow.Application.MediatR.Commands
             return new AddSnapshotCommand
             {
                 AssetId = dto.AssetId,
-                CreatedAt = dto.CreatedAt,
+                CreatedAt = DateTime.UtcNow,
                 Balance = dto.Balance
             };
         }

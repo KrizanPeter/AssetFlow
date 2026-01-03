@@ -23,6 +23,7 @@ namespace AssetFlow.API.ExtensionsDI
             services.AddScoped<IUserContext, UserContext>();
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IAssetService, AssetService>();
+            services.AddScoped<ISnapshotService, SnapshotService>();
             return services;
         }
     }

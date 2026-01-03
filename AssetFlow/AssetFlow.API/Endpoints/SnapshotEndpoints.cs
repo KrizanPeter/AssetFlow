@@ -2,10 +2,7 @@
 using AssetFlow.API.Extensions;
 using AssetFlow.Application.Dtos.Asset;
 using AssetFlow.Application.MediatR.Commands;
-using AssetFlow.Application.MediatR.Queries;
-using AssetFlow.Shared.Contexts;
 using MediatR;
-using Microsoft.Extensions.Logging;
 
 namespace AssetFlow.API.Endpoints
 {
@@ -14,7 +11,7 @@ namespace AssetFlow.API.Endpoints
         private const string SWAGGER_TAG = "Snapshot";
         public static IEndpointRouteBuilder RegisterSnapshotRoutes(IEndpointRouteBuilder endpoints)
         {
-            endpoints.MapPost("/api/snapshot/{id}", AddSnapshot).WithTags(SWAGGER_TAG);
+            endpoints.MapPost("/api/snapshot", AddSnapshot).WithTags(SWAGGER_TAG);
 
 
 

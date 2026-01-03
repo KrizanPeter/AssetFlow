@@ -98,5 +98,24 @@ namespace AssetFlow.Application.Services
                 return Result.Fail("An error occurred while getting the assets.");
             }
         }
+
+        public async Task<Result<bool>> HasOwnership(Guid accountId, Guid assetId)
+        {
+            try
+            {
+                var hasOwnership = await _unitOfWork.QuerySession
+                    .Query<SnapshotAssetView>()
+                    .AnyAsync(x => x.AccountId == accountId && x.Id == assetId);
+
+                return hasOwnership
+                    ? Result.Ok(true)
+                    : Result.Fail<bool>("Ownership not found.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting assets for accountID {AccountId}", accountId);
+                return Result.Fail<bool>("An error occurred while getting the assets.");
+            }
+        }
     }
 }

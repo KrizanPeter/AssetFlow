@@ -13,6 +13,7 @@ namespace AssetFlow.Application.Interfaces.IServices
         Task<Result<AssetsDto>> GetAssetsByAccountId(Guid accountId);
         Task<Result<Guid>> CreateAsset(SnapshotAssetCreated asset);
         Task<Result<Guid>> CreateAsset(LedgerAssetCreated asset);
+        Task<Result<bool>> HasOwnership(Guid accountId, Guid assetId);
 
     }
 }

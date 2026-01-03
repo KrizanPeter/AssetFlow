@@ -20,5 +20,11 @@ namespace AssetFlow.Domain.Entities.EventAggregates
             DateOfCreation = e.DateOfCreation;
             DateOfLastModification = e.DateOfLastModification;
         }
+
+        public void Apply(SnapshotCreated e)
+        {
+            var snapshot = Snapshot.Of(e);
+            Snapshots.Add(snapshot);
+        }
     }
 }
